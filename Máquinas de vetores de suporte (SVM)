@@ -2,31 +2,39 @@ O que são máquinas de vetores de suporte?
 Uma máquina de vetores de suporte (SVM) é um algoritmo de aprendizado de máquina supervisionado. Que classifica dados ao identificar uma linha ou hiperplano ideal 
 maximizando a separação entre cada classe em um espaço N-dimensional.
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 O que é um N-dimensional?
 São espaços matemáticos podem ser estendidos a qualquer dimensão, e tal espaço é chamado espaço euclidiano n-dimensional ou um n-espaço
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 As SVMs foram desenvolvidas na década de 1990 por Vladimir N. Vapnik e seus colegas, 
 eles publicaram esse trabalho em um artigo intitulado "Support Vector Method for Function Approximation, Regression Estimation, and Signal Processing"1 em 1995.
 
 As SVMs são comumente usadas em problemas de classificação. 
-Eles distinguem duas classes encontrando o hiperplano (ideal) que maximiza a margem entre os pontos de dados mais próximos de classes opostas.
-O número de atributos dos dados de entrada determina se o hiperplano é uma linha em um espaço 2D ou um plano em um espaço n-dimensional. 
+Eles distinguem duas classes. Encontrando o hiperplano (ideal) que maximiza a margem entre os pontos de dados mais próximos de classes opostas.
+E número de atributos dos dados de entrada determina se o hiperplano é uma linha em um espaço 2D ou um plano em um espaço n-dimensional. 
 Como vários hiperplanos podem ser encontrados para diferenciar as classes, 
 maximizar a margem entre os pontos permite que o algoritmo encontre o melhor limite de decisão entre as classes. 
 Isso, por sua vez, permite uma boa generalização dos novos dados e a realização de previsões de classificação precisas.
 As linhas adjacentes ao hiperplano ideal são conhecidas como vetores de suporte, pois esses vetores percorrem os pontos de dados que determinam a margem máxima.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Em resumo:
 As máquinas de vetores de suporte (SVM) são algoritmos de classificação que buscam o melhor hiperplano para separar dados em diferentes classes,
 maximizando a margem entre eles. Funcionam em espaços de várias dimensões, 
 dependendo da quantidade de atributos dos dados, e são eficientes para garantir uma boa separação e previsão precisa.
 
-Tendo Tipos de classificadores SVM
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Tipos de classificadores SVM
 
 SVMs lineares
 As SVMs lineares são usadas com dados linearmente separáveis, o que significa que os dados não precisam passar por transformações para serem separados em diferentes classes.
 O limite de decisão e os vetores de suporte formam a aparência de uma rua, e o professor Patrick Winston, do MIT, usa a analogia do 
-"ajuste da rua mais larga possível"2 (link fora de ibm.com) para descrever esse problema de otimização quadrática. Matematicamente, esse hiperplano separador pode ser
+"ajuste da rua mais larga possível" para descrever esse problema de otimização quadrática. Matematicamente, esse hiperplano separador pode ser
 representado como:
 
 wx + b = 0
@@ -34,31 +42,58 @@ wx + b = 0
 em que w é o vetor de peso, x é o vetor de entrada e b é o termo de viés.
 
 Há duas abordagens para calcular a margem, ou a distância máxima entre as classes, que são a classificação com margem rígida e a classificação 
-com margem flexível. Se usarmos uma SVM de margem rígida, os pontos de dados serão perfeitamente separados fora dos vetores de suporte, ou "fora da rua" 
+com margem flexível. 
+Se usarmos uma SVM de margem rígida, os pontos de dados serão perfeitamente separados fora dos vetores de suporte, ou "fora da rua" 
 segundo a analogia do professor Hinton. Isso é representado pela fórmula,
 
 (wxj + b) yj ≥ a,
 
-E, em seguida, a margem é maximizada, o que é representado como: max ɣ = a / ||w||, onde  é a margem projetada sobre w.
+E em seguida, a margem é maximizada, o que é representado como: 
 
-A classificação de margem flexível, como o próprio nome diz, é mais flexível, permitindo alguns erros de classificação por meio do uso de variáveis de folga ('ξ'). 
+max ɣ = a / ||w||, 
+
+onde é a margem é projetada sobre w.
+
+A classificação de margem flexível, como o próprio nome diz, é mais flexível, permitindo alguns erros de classificação por meio do uso de variáveis de folga 
+('ξ'). 
 O hiperparâmetro, C, ajusta a margem; um valor C maior estreita a margem para a classificação incorreta mínima, 
-enquanto um valor C menor a amplia, permitindo a classificação incorreta de mais dados3.
+enquanto um valor C menor a amplia, permitindo a classificação incorreta de mais dados.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 SVMs não lineares
-Grande parte dos dados em cenários do mundo real não são separáveis de forma linear, e é aí que as SVMs não lineares entram em ação. A fim de tornar os dados 
-separáveis de forma linear, métodos de pré-processamento são aplicados aos dados de treinamento para transformá-los em um espaço de atributos de maior dimensão. 
-Dito isso, os espaços dimensionais superiores são capazes de criar mais complexidade, aumentando o risco de sobreajuste dos dados e aumentando a exigência computacional. 
+Grande parte dos dados em cenários do mundo real não são separáveis de forma linear, e é aí que as SVMs não lineares entram em ação. 
+A fim de tornar os dados separáveis de forma linear, métodos de pré-processamento são aplicados aos dados de treinamento 
+para transformá-los em um espaço de atributos de maior dimensão. 
+Dito isso, os espaços dimensionais superiores são capazes de criar mais complexidade, 
+aumentando o risco de sobreajuste dos dados e aumentando a exigência computacional. 
 O "truque do kernel" ajuda a reduzir parte dessa complexidade, tornando a computação mais eficiente, 
 e faz isso substituindo os cálculos de produto escalar por uma função de kernel equivalente.
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Existem diversos tipos de kernels que podem ser aplicados para classificar dados. Algumas funções de kernel populares incluem:
 
-Kernel polinomial
+Kernel polinomial:
 
-Kernel de função de base radial (também conhecido como kernel gaussiano ou RBF)
+É uma função de kernel comumente usada com máquinas de vetores de suporte e outros modelos kernelizados, 
+que representa a semelhança de vetores em um espaço de recursos sobre polinômios das variáveis ​​originais, permitindo o aprendizado de modelos não lineares.
 
-Kernel Sigmoide
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Kernel de função de base radial (também conhecido como kernel gaussiano ou RBF):
+
+Uma função de base radial é uma função sobre números reais cujos valores dependem apenas da distância a partir da origem, tal que ou, alternativamente,
+sobre algum outro ponto c, chamado de centro, tal que Qualquer função que satisfaça a propriedade é uma função radial.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Kernel Sigmoide:
+
+O kernel sigmoide, inspirado na função de ativação usada em redes neurais, pode produzir limites de decisão complexos e não lineares.
+No entanto, seu uso é menos comum devido ao potencial para regiões de decisão não convexas.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Regressão por vetores de suporte (SVR)
 A regressão por vetores de suporte (SVR) é uma extensão das SVMs, aplicada a problemas de regressão (ou seja, o resultado é contínuo).
@@ -86,6 +121,8 @@ como f1-score, precisão ou recall.
 Ajuste de hiperparâmetros
 Os hiperparâmetros podem ser ajustados para melhorar o desempenho de um modelo SVM. Os hiperparâmetros ideais podem ser encontrados usando métodos de pesquisa de grade 
 e validação cruzada, que irão iterar diferentes valores de kernel, regularização (C) e gama para encontrar a melhor combinação.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 SVMs x outros classificadores de aprendizado supervisionado
 Diferentes classificadores de aprendizado de máquina podem ser usados para o mesmo caso de uso. É importante testar e avaliar diferentes modelos para entender 
@@ -126,3 +163,5 @@ As SVMs são frequentemente aplicadas na pesquisa de câncer (link fora de ibm.c
 Sistema de informação geográfica (GIS)
 As SVMs podem analisar estruturas geofísicas em camadas no subsolo, filtrando o "ruído" dos dados eletromagnéticos.
 Eles também ajudaram a prever o potencial de liquefação sísmica do solo, o que é relevante para o campo da engenharia civil.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
