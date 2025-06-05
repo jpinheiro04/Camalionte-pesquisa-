@@ -1,0 +1,189 @@
+Suporte Vector Machine ou popularmente conhecido como SVM um algoritmo superpoderoso que traz muitas vantagens para nós!
+
+Para começar a falar sobre o Support Vector Machine vamos dar um exemplo simples:
+
+Vamos supor que temos um conjunto de pontos como este da foto abaixo, podemos observar que para a direita todos os pontos são amarelos e para a esquerda todos os pontos são roxos.
+
+Exemplo
+Exemplo
+Neste exemplo entre os pontos roxos e amarelos temos um ponto vermelho.
+
+Qual seria a classificação deste ponto? Na sua opinião, seria roxo ou Amarelo?
+
+Classifique o ponto.
+Classifique o ponto.
+Devido à proximidade do ponto vermelho com os pontos roxos é muito provável que você tenha achado que a classificação desse ponto é roxo.
+
+Se o ponto vermelho estivesse mais à direita próximo aos pontos Amarelos provavelmente você diria que o ponto seria classificado como amarelo…
+
+Perceba que intuitivamente pela proximidade do ponto ao grupo de cor amarela ou roxa você definiu a classificação do ponto.
+
+Essa lógica é muito parecida com a que vamos usar no SVM.
+
+Basicamente vamos pegar os pontos mais extremos e usar estes pontos para criar um limite de separação.
+
+A pergunta que queremos responder é:
+
+Qual seria o melhor lugar entre os pontos para colocar o nosso limite de separação?
+
+Este lugar irá indicar que se o meu valor ou meu ponto for menor que este do que o ponto deste local então ele vai ser classificado como roxo e se for maior vai ser classificado como amarelo.
+
+Nesta escala nós conseguimos perceber visualmente que talvez este local ou ponto seja o 0,8.
+
+Meio da escala.
+Meio da escala.
+Isso porque o 0,8 Está relativamente no meio da escala
+
+Conceitualmente o que tem por trás disso que estamos fazendo?
+
+O que o algoritmo vai fazer é pegar os pontos que estão mais extremos, ou seja, os pontos que pertencem a classes diferentes e que tenham a menor distância entre eles:
+
+Menor distância entre os pontos.
+Menor distância entre os pontos.
+A estes pontos damos o nome de vetores de suporte os vetores de suporte servem para traçarmos a margem que vai definir qual vai ser o nosso hiperplano de separação.
+
+Support Vector Machine
+Vetores de suporte.
+O conceito do Support Vector Machine é basicamente esse, nós pegamos os pontos de classes diferentes que estão mais próximos entre si e a partir deles definimos as margens, todo mundo que está para trás dessa margem é roxo e todo mundo que está para frente dessa margem é amarelo.
+
+Mas o SVM só pode ser usado em dados linearmente separáveis? Não, pode ser usado em dados que não são linearmente separáveis porque já existe dentro do próprio algoritmo uma maneira de fazer esses dados se tornarem linearmente separáveis.
+
+Quando nós falamos linearmente separados não estamos falando somente de uma reta, podemos estar falando de uma reta quando temos duas dimensões, ou estar falando de um plano quando temos três dimensões e os hiperplanos quando nós temos mais de três dimensões onde não temos uma capacidade de visualização muito clara.
+
+Para conseguir fazer isso com dados que parecem não ser linearmente separáveis o que o SVM vai fazer é aumentar essas dimensões.
+
+Nesta imagem, por exemplo, o SVM pode elevar os nossos dados ao quadrado, por estar muito próximo de zero quando elevamos ao quadrado não muda muito os valores, mas já possibilita criar uma linha em 2D que separe os pontos.
+
+Support Vector Machine
+Truque de Kernel.
+Isso tudo que foi mostrado até agora não é uma coisa que precisamos decorar, porém, é importante saber de onde vem esse nome (Truque de Kernel).
+
+Vamos para a parte prática? Vamos usar o Dataset Iris como nas aulas anteriores, começaremos pegando as colunas de pétala somente com os targets 0 e 1.
+
+Por que nós fazemos isso?
+
+Basicamente porque visualmente é muito melhor, vamos clicar no link e ir para a documentação, a partir da documentação iremos fazer a aplicação como fizemos nas outras aulas, caso você não tenha visto as outras aulas vou deixar os links para você acessar.
+
+REGRESSÃO LOGÍSTICA – ALGORITMOS DE APRENDIZADO DE MÁQUINAS
+ALGORITMO KNN (K-NEAREST NEIGHBORS) – ALGORITMO DE APRENDIZADO DE MÁQUINAS
+ÁRVORE DE DECISÃO – ALGORITMOS DE APRENDIZADO DE MÁQUINAS
+Documentação:
+
+Para começar, podemos já usar o dataset iris
+
+https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html#sklearn.datasets.load_iris
+
+Documentação.
+Documentação.
+Vamos importar da mesma forma que estávamos fazendo em todas as aulas, copiando da documentação para o nosso código.
+
+Support Vector Machine
+Importando o dataset
+Separando em treino e teste
+
+https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
+
+Treino e teste.
+Treino e teste.
+Visualizando graficamente essas informações
+
+https://matplotlib.org/stable/plot_types/basic/scatter_plot.html#sphx-glr-plot-types-basic-scatter-plot-py
+
+Support Vector Machine
+Visualizando graficamente.
+Utilizando o SVC
+
+https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC
+
+SVC
+SVC
+Obs. Quem é o meu Coef?
+
+É o meu coeficiente angular, da mesma forma que estávamos fazendo na regressão linear.
+
+W1 e W2
+W1 e W2
+W0 = clf.intercept_[0] fazendo desta forma vamos ter o ponto que intercepta os dados, só lembrando, quando a gente fala de equação da reta o coef seria o coeficiente angular e o intercept seria o coeficiente linear.
+
+Então o intercept é o valor que vai ser constante, se eu tiver uma reta de X e Y o intercept é exatamente o valor onde x = 0 e se eu tiver o coeficiente angular, ele será o valor que sempre multiplica o X, aqui como eu tenho dois valores de X vamos ter W1 e W2.
+
+Função reta.
+Função reta.
+A equação destacada na imagem acima é muito importante porque se quisermos encontrar as margens nós podemos usar esta mesma equação a fazendo igual a +1 e igual a -1.
+
+Fazendo assim vamos conseguir achar o deslocamento responsável por gerar as margens.
+
+Isolando o y.
+Isolando o y.
+Na imagem acima isolamos o y.
+
+Por que fizemos isso?
+
+Porque vamos pegar os dados destacados da foto abaixo e gerar uma reta com o nosso algoritmo de SVM.
+
+Support Vector Machine
+Seleção – copiar
+Vamos então copiar os dados destacados da imagem acima.
+
+Se quisermos traçar esta reta vamos precisar pegar um conjunto  de valores de x, podemos fazer isso utilizando o x= np.linspace() que basicamente vai pegar os valores do ponto inicial até o ponto final e a quantidade de valores que quisermos.
+
+Após definir os valores é só acrescentar o nosso y, (a função que já separamos anteriormente), lembrando que o “x” será os nossos valores de np.linspace que acabamos de definir.
+
+Quando fizermos o plot vamos encontrar nossa reta.
+
+Reta.
+Reta.
+Também podemos mexer no tamanho, temos esta opção na documentação.
+
+Ax.set(ylim=(0,1.7))
+
+Ajustando a reta.
+Ajustando a reta.
+Pela documentação podemos ver também ver quais foram os vetores de suporte usados para traçar esta reta:
+
+Documentação = Support_vectors_: ndarray of shape (n_SV, n_features)
+
+Então se fizermos um CLF vamos ter:
+
+CLF
+CLF
+Também podemos visualizar de outra  forma, pegando do Support_vectors_: somente os valores de x e de y e traçar junto nessa reta.
+
+Podemos traçar as margens que nada mais são do que a equação destacada na imagem abaixo, vamos apenas mudar de “igual a 0” para “igual a +1” e “igual a -1”.
+
+Função - reta.
+Função – reta.
+Vamos identificar as margens como y2 e y3 e colocar como linha tracejada.
+
+Resultado:
+
+Resultado
+Resultado
+Support Vector Machine
+Resultado.
+Agora que traçamos nosso hiperplano, os novos valores a direita serão classificados como amarelo e os novos valores a esquerda serão classificados como roxo.
+
+Só para fechar vamos fazer isso com todos os dados, usando as quatro colunas que temos.
+
+Support Vector Machine
+Usando a base completa.
+Usando a matriz de confusão o algoritmo está prevendo com 100% de acerto, como dissemos é um algoritmo muito potente, porém, pode ser mais lento e antes de escolher usá-lo é importante verificar o tempo de entrega dos seus trabalhos.
+
+Ícone Ciência de Dados
+Ciência de Dados
+Impressionador
+Se você quiser sair do zero até o nível avançado e aprender absolutamente tudo o que você precisa para usar Ciência de Dados para se destacar no Mercado de Trabalho e poder entrar nas carreiras mais promissoras e desejadas nas empresas, esse curso é pra você.
+
+Começar agora
+Seta para a direita
+Círculos e ícones usados como fundoLuzes usadas como fundoTrês imagens de aulas do curso de Ciência de Dados
+Conclusão – SVM (Support Vector Machine)
+Nessa aula te ensinamos o que é o SVM (Support Vector Machine) e como nós utilizamos esse modelo para fazer uma classificação dos nossos dados de treino e teste.
+
+Nós também mostramos de forma visual como é feita essa classificação, como o modelo funciona e toma decisões.
+
+Este modelo de algoritmo conseguiu classificar estes dados com 100% de acerto, é um algoritmo muito robusto e potente, porém pode demorar para concluir seu processo.
+
+Usá-lo depende do tempo que você tem para entregar seu trabalho.
+
+Espero ter ajudado! Até a Próxima! Abraço,
